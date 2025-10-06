@@ -34,8 +34,6 @@ This project serves as a learning playground for experimenting with React Router
 
 ## 🚀 Getting Started
 
-1️⃣ Clone the Repository
-
 1. **Clone the repository**
 
    ```bash
@@ -55,6 +53,7 @@ This project serves as a learning playground for experimenting with React Router
    ```
 
 1. **Start the development server**
+
    ```bash
    npm run dev
    ```

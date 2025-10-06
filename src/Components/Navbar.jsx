@@ -1,6 +1,13 @@
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
+import ThemeToggle from "./ThemeToggle";
+import { ShoppingCart } from "lucide-react";
+import { use } from "react";
+import { CartContext } from "../Providers/CartContext";
 
 const Navbar = () => {
+  const contextValue = use(CartContext);
+  const { cart } = contextValue;
+
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">
@@ -30,6 +37,9 @@ const Navbar = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
+              <Link to="/Cart">Cart </Link>
+            </li>
+            <li>
               <Link to="/About">About</Link>
             </li>
             <li>
@@ -40,25 +50,53 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">Explore RectRouter</a>
+        <Link to="/" className="btn btn-ghost text-xl">
+          Explore RectRouter
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/About">About</Link>
-          </li>
-          <li>
-            <Link to="/Contact">Contact</Link>
-          </li>
-          <li>
-            <Link to="/Blogs">Blogs</Link>
-          </li>
+        <ul className="menu gap-6 font-normal menu-horizontal">
+          <NavLink
+            className={({ isActive }) => (isActive ? "text-green-400" : "")}
+            to="/"
+          >
+            Home
+          </NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? "text-green-400" : "")}
+            to="/About"
+          >
+            About
+          </NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? "text-green-400" : "")}
+            to="/Contact"
+          >
+            Contact
+          </NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? "text-green-400" : "")}
+            to="/Blogs"
+          >
+            Blogs
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "text-green-400 relative" : "relative"
+            }
+            to="/Cart"
+          >
+            <div>
+              <ShoppingCart size={20} />
+              <p className="font-medium text-sm absolute  -top-3 -right-2">
+                {cart.length}
+              </p>
+            </div>
+          </NavLink>
         </ul>
       </div>
-      <div className="navbar-end">
+      <div className="navbar-end gap-4">
+        <ThemeToggle />
         <a className="btn">Login</a>
       </div>
     </div>

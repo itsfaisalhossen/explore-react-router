@@ -1,24 +1,29 @@
-import { useLoaderData } from "react-router";
+import { use } from "react";
+import { useLocation } from "react-router";
+import { CartContext } from "../Providers/CartContext";
 
 const PlantDetails = () => {
-  const { data } = useLoaderData();
+  const location = useLocation();
+  const { name, description, category, price, image } = location.state || {};
+  const contextValue = use(CartContext);
+  const { setCart } = contextValue;
 
+  // console.log(contextValue);
+  // const { data } = useLoaderData();
+  // const { name, description, category, price, image } = data.plants;
   // const { id } = useParams();
   // const [plants, setPlants] = useState({});
-
   // useEffect(() => {
   //   // fetch data using axios
   //   axios(`https://openapi.programming-hero.com/api/plant/${id}`).then((data) =>
   //     setPlants(data.data.plants)
-  //   );
+  //   )
   //   .then((res) => res.json())
   //   .then((data) => setPlants(data?.plants));
   // }, [id]);
 
-  const { name, description, category, price, image } = data.plants;
-
   return (
-    <div className="w-4xl mx-auto px-10 my-10">
+    <div className="max-w-4xl mx-auto px-10 my-10">
       <div className=" card-side bg-base-100 shadow-sm">
         <figure className="h-[300px]">
           <img
@@ -37,7 +42,12 @@ const PlantDetails = () => {
           </div>
           <p className="mb-6">{description}</p>
           <div className="card-actions justify-end">
-            <button className="btn btn-primary w-xs">Add to Cart</button>
+            <button
+              onClick={() => setCart((prev) => [...prev, location.state])}
+              className="btn btn-neutral w-sm"
+            >
+              Add to Cart
+            </button>
           </div>
         </div>
       </div>

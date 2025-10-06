@@ -17,8 +17,9 @@ const PlantCard = ({ plant }) => {
         </div>
         <p>{plant.description}</p>
         <Link
+          state={plant}
           to={`/Plant-Details/${plant.id}`}
-          className="btn btn-primary w-full"
+          className="btn btn-neutral w-full"
         >
           View Details
         </Link>
